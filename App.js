@@ -1,12 +1,18 @@
-import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View, Image } from "react-native"
+import { StyleSheet, Text, View, Image, StatusBar } from "react-native"
+import { Button } from "@react-native-material/core"
 import bg from "./assets/backgrounds/dreamBG.png"
+
 export default function App() {
   return (
     <View style={styles.container}>
       <Image source={bg} style={styles.backgroundImage} />
-      <Text>Start</Text>
-      <StatusBar style="auto" />
+      <Button title="SETTINGS" />
+      <Button title="START" />
+      <Button title="CUSTOM" />
+
+      <StatusBar
+        barStyle="light-content" // Set the desired status bar style
+      />
     </View>
   )
 }
