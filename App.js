@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, StatusBar } from "react-native"
 import { Button, Stack } from "@react-native-material/core"
 import bg from "./assets/backgrounds/dreamBG.png"
+import AutomaticPage from "./AutomaticPage"
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
               )
             }}
           />
+          <AutomaticPage />
         </Stack>
       </View>
       <StatusBar
