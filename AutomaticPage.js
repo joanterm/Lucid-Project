@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react"
 import { StyleSheet, Text, View, Image, StatusBar, TouchableOpacity } from "react-native"
 import { Button, Stack } from "@react-native-material/core"
+import { Audio } from 'expo-av'
 
 const AutomaticPage = () => {
-    const [countdown, setCountdown] = useState(3) // 3 minutes
+    const [countdown, setCountdown] = useState(20) // 3 seconds
     const [isRunning, setIsRunning] = useState(false)
+    const [sound, setSound] = useState()
+
+    async function playSound() {
+        const { sound } = await Audio.Sound.createAsync( require('./soundtest.mp3'))
+        setSound(sound);
+        await sound.playAsync()
+    }
 
     //COUNTDOWN HAPPENS HERE
     useEffect(() => {
@@ -17,9 +25,15 @@ const AutomaticPage = () => {
                         clearInterval(interval)
                         setIsRunning(false)
                         return 0
-                    } else {
+                    } 
+                    if (prev % 5 === 0 && prev !== 20) {
+                        console.log("music here")
+                        playSound()              
+                    }
+                    else {
                         return prev - 1
-                    }                    
+                    }     
+                    return prev - 1               
                 })
             }, 1000)
         } else {
@@ -34,7 +48,7 @@ const AutomaticPage = () => {
     const handleStartStop = () => {
         setIsRunning(!isRunning)
         if (countdown === 0) {
-            setCountdown(6)
+            setCountdown(20)
         }
     };
 
@@ -54,6 +68,7 @@ const AutomaticPage = () => {
             <TouchableOpacity style={styles.button} onPress={handleStartStop}>
                 <Text style={styles.buttonText}>{isRunning ? 'STOP' : 'START'}</Text>
             </TouchableOpacity>
+            {/* <Button title="PLAY" onPress={playSound}/> */}
         </View>
      );
 }
